@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ</title>
+<link rel="stylesheet" href="css/sample.css">
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+<div>
+   <p class="hero-text">学校風チャットアプリ</p>
+   <div class="chalk1"></div>
+   <div class="chalk2"></div>
+</div>
+
+<div>
+ 
+    <div class="scroll">
+    <div id="output"></div>
+    </div>
+    <div id="start">
+        <input type="text" id="uname">
+    </div>
+    <div id="start1">
+        <textarea name="" id="text" cols="22.5" rows="10"></textarea><br>
+        <button id="send">送信</button>
+        <button id="clear">削除</button>
+    </div>
+
+ <!-- icon追加 -->
+    <div>
+        <ul class="icon2">
+            <li class="imgs" data-img="0"><img src="imgs/buke.png" width="100"></li>
+            <li class="imgs" data-img="1"><img src="imgs/tuku.jpg" width="100"></li>
+            <li class="imgs" data-img="2"><img src="imgs/caram.png" width="100"></li>
+        </ul>
+    </div>
+</div>
+
+<!--/ コンテンツ表示画面 -->
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+<!--** 以下Firebase **-->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.0/firebase-database.min.js";
+
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "",
+      authDomain: "gsapp-fcaff.firebaseapp.com",
+      projectId: "gsapp-fcaff",
+      storageBucket: "gsapp-fcaff.appspot.com",
+      messagingSenderId: "356147987655",
+      appId: "1:356147987655:web:7f58f2d420b8b95946aae2"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+// realtimedatabaseを使う
+    const db = getDatabase(app);
+    const dbRef = ref(db, "chat");
+
+// icon処理
+let d=0;
+    const img = ["buke.png","tuku.jpg","caram.png"];
+    $(".imgs").on("click",function(){
+        d = $(this).attr("data-img");
+    });
+
+// 送信ボタンを押したら発生するjquery
+    $("#send").on("click",function(e){
+      const uname = $("#uname").val();
+      const text = $("#text").val();
+      const msg = {
+          uname: uname,
+          text: text,
+          icon:d,
+      };
+      const newPostRef = push(dbRef);
+      set(newPostRef, msg);
+    });
+
+    onChildAdded(dbRef, function(data){
+        const msg = data.val();
+        const myname = $("#uname").val();
+        const key = data.key;
+        let h = '<div id="mymsgall">';
+            h += '<div id="myname">';
+            h += msg.uname;
+            h += '</div>';
+            h += '<div id="mymsgdelete">';
+            h += '<div id="mymsg">';
+            h += msg.text;
+            h += "</div>";
+            h += '<button id="delete" class="';
+            h += key;
+            h += '">削除</button>';
+            h += "</div>";
+    // 画面のコメントのみ消去
+    $(document).on("click","#delete",function(){
+        remove(ref(db, "chat/" + $(this).attr("id")));
+        $(this).parent().remove();
+        console.log(document);
+        $(document)
+    });
+
+        let str = '<img src="imgs/+img[v.icon]+"width="50">';
+
+        $("#output").append(h); // #output の最後に追加
+    });
+    // Realtime DataBaseは消える
+    $("#delete").on("click",function(){
+        remove(ref(db, "chat/" + key));
+        $("#delete").remove();
+        console.log(click);
+        $("delete")
+    });
+
+//Clearクリックイベント
+$("#clear").on("click",function(){
+    localStorage.clear();
+    $("#output").empty();
+}) ;
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+/* スクロール設定 */
+.scroll {
+    height: 300px;
+    overflow: auto;
+}
+
+html {
+    background-color: gainsboro;
+}
+
+body {
+    background-color: rgb(199, 202, 197);
+    margin: auto 300px;
+}
+
+
+#start {
+    text-align: center;
+    margin:  1.5em auto 0.5em;
+}
+
+#start1 {
+    text-align: center;
+    margin: auto;
+}
+
+textarea {
+    vertical-align:top;
+    margin: 0 0 10px;
+}
+
+#myname {
+    padding: 0.5em 1em;
+    margin: auto;
+    margin-bottom: -1px;
+    background: #f4f4f4;
+    border-left: solid 6px #5bb7ae;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);
+    font-weight: bold;
+    font-style: italic;
+    height: 5%;
+    width: 20%;
+    font-size: 13px;
+}
+
+#mymsg {
+    font-size: 100%;
+    background: #f8f0d7;
+    border-left: 5px dotted rgba(0,0,0,.1);
+    padding: 1em;
+    color: rgb(10, 9, 9);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px silver;
+    width: 20%;
+    margin : 0.5rem auto 1.5rem;
+}
+
+#delete {
+    margin-left : 58%;
+    margin-top: -3px;
+    margin-bottom: 5px;
+}
+
+.hero-text {
+    color: #fff;
+    font-size: 3.0rem;
+    font-weight: bold;
+    background: #104300;
+    margin: 0.2em auto;
+    padding: 0.8em;
+    border: 8px solid #a60;
+    box-shadow: 2px 2px 4px #999, 2px 2px 2px #020 inset;
+    min-width: fit-content;
+    text-align: center;
+    font-style: italic;
+    width: 25%;
+    text-decoration: underline;
+    letter-spacing: 0.1em;
+    line-height:0.95em;
+    text-shadow: 0 0 0.2em rgba(0,0,0,1);
+}
+
+.chalk1{
+    border: solid 3px #fff;
+    width: 15px;
+    border-radius: 3px 2px 0 2px;
+    position: absolute;
+    top: 140px;
+    margin-left: 35%;
+  }
+
+.chalk2{
+    border: solid 3px rgb(227, 243, 10);
+    width: 15px;
+    border-radius: 3px 2px 0 2px;
+    position: absolute;
+    top: 140px;
+    margin-left: 38%;
+  }
+
+.icon2 {
+    display: flex;
+    justify-content: center;
+}
+
+.imgs {
+    margin: 5px;
+}
